@@ -9,6 +9,7 @@ class User(USER):
 
 class Course(models.Model):
 
+    instructor = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=50, unique=True)
     description = models.CharField(max_length=500)
     weeks = models.PositiveIntegerField()

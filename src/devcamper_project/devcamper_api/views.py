@@ -1,9 +1,17 @@
 from django.shortcuts import render
 from .models import Bootcamp, User, Course, Review
-from rest_framework import viewsets, filters, views, response
+from rest_framework import viewsets, filters, views, response, authentication, permissions
 from .serializers import BootcampSerializer, UserSerializer, CourseSerializer, ReviewSerializer
 from .permissions import UsersPermissions, BootcampsPermissions, CoursesPermissions, ReviewsPermissions
-# Create your views here.
+from rest_framework.authtoken.serializers import AuthTokenSerializer
+from rest_framework.authtoken.views import ObtainAuthToken
+
+
+class TokenViewSet(viewsets.ViewSet):
+    serializer_class = AuthTokenSerializer
+
+    def create(self, request):
+        return ObtainAuthToken().post(request)
 
 
 class UpdatePasswordView(views.APIView):
@@ -45,13 +53,17 @@ class ReviewsOfBootcamps(views.APIView):
 
 class UsersViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
-    permission_classes = (UsersPermissions,)
+    permission_classes = (
+        permissions.IsAuthenticatedOrReadOnly, UsersPermissions,)
+    authentication_classes = (authentication.TokenAuthentication,)
     queryset = User.objects.all()
 
 
 class BootcampsViewSet(viewsets.ModelViewSet):
     serializer_class = BootcampSerializer
-    permission_classes = (BootcampsPermissions,)
+    permission_classes = (
+        permissions.IsAuthenticatedOrReadOnly, BootcampsPermissions,)
+    authentication_classes = (authentication.TokenAuthentication,)
     queryset = Bootcamp.objects.all()
     filter_backends = (filters.SearchFilter,)
     search_fields = ('zipcode',)
@@ -59,7 +71,9 @@ class BootcampsViewSet(viewsets.ModelViewSet):
 
 class CoursesViewSet(viewsets.ModelViewSet):
     serializer_class = CourseSerializer
-    #permission_classes = (BootcampsPermissions,)
+    permission_classes = (
+        permissions.IsAuthenticatedOrReadOnly, CoursesPermissions,)
+    authentication_classes = (authentication.TokenAuthentication,)
     queryset = Course.objects.all()
     filter_backends = (filters.SearchFilter,)
     search_fields = ('title',)

@@ -28,7 +28,7 @@ class CourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Course
         fields = ('id', 'title', 'description', 'weeks', 'tuition', 'minimumSkill',
-                  'scholarhipsAvailable',)
+                  'scholarhipsAvailable', 'instructor',)
 
 
 class ReviewSerializer(serializers.ModelSerializer):
