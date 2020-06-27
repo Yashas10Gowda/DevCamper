@@ -1,6 +1,8 @@
 from django.contrib import admin
-from .models import Bootcamps,Users
+from .models import Bootcamp, User, Course, Review
 # Register your models here.
 
-admin.site.register(Bootcamps)
-admin.site.register(Users)
+admin.site.register(User)
+admin.site.register(Bootcamp)
+admin.site.register(Course)
+admin.site.register(Review)
