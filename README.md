@@ -1,6 +1,6 @@
 # DevCamper
 
-Worked on my Rest-API building skills. Looked around a bit and thought how about recreating a whole project from ground up using a totaly different tech-stack and then I came to conculsion that django and django-rest-framework is a deadly combination that goes head to against ME_N stacks.
+Worked on my Rest-API building skills. Looked around a bit and thought how about recreating a whole project from ground up using a totaly different tech-stack and then I came to conculsion that django and django-rest-framework is a deadly combination that goes head to head against ME_N stacks.
 
 ## Usage
 
